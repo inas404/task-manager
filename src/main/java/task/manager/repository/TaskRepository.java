@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
-  Task findByProjectId(Long postId);
+  Task findByProjectId(Long projectId);
 }

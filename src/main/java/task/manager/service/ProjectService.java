@@ -1,11 +1,8 @@
 package task.manager.service;
 
-import java.util.Optional;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import task.manager.model.Project;
-import task.manager.model.Task;
 import task.manager.repository.ProjectRepository;
 
 @Service
