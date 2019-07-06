@@ -40,7 +40,6 @@ public class TaskManagerControllerTest {
     mockedProject.setId(0L);
     mockedProject.setName("First Project");
     mockedProject.setDescription("Description of first Project");
-    mockedProject.setTasks(Collections.singleton(new Task()));
   }
 
   @Test

@@ -14,11 +14,10 @@ public class ProjectService {
   @Autowired
   private ProjectRepository projectRepository;
 
-  public long addProject(String name, String description, Set<Task> tasks) {
+  public long addProject(String name, String description) {
     Project newProject = new Project();
     newProject.setName(name);
     newProject.setDescription(description);
-    newProject.setTasks(tasks);
     newProject = projectRepository.save(newProject);
     return newProject.getId();
   }
@@ -28,11 +27,10 @@ public class ProjectService {
     return newProject.getId();
   }
 
-  public void updateProject(String name, String description, Set<Task> tasks) {
+  public void updateProject(String name, String description) {
     Project projectToBeUpdated = projectRepository.findByName(name);
     projectToBeUpdated.setName(name);
     projectToBeUpdated.setDescription(description);
-    projectToBeUpdated.setTasks(tasks);
     projectRepository.save(projectToBeUpdated);
   }
 
@@ -41,7 +39,6 @@ public class ProjectService {
         .orElseThrow(() -> new RuntimeException(String.format("Project with id[%d] not found", project.getId())));
     projectToBeUpdated.setName(project.getName());
     projectToBeUpdated.setDescription(project.getDescription());
-    projectToBeUpdated.setTasks(project.getTasks());
     projectRepository.save(projectToBeUpdated);
   }
 

@@ -30,7 +30,6 @@ public class ProjectServiceTest {
     mockedProject.setId(0L);
     mockedProject.setName("First Project");
     mockedProject.setDescription("Description of first Project");
-    mockedProject.setTasks(Collections.singleton(new Task()));
     when(projectRepository.findById(0L)).thenReturn(Optional.of(mockedProject));
     when(projectRepository.save(any())).thenReturn(mockedProject);
   }

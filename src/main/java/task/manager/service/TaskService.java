@@ -28,10 +28,8 @@ public class TaskService {
     t.setPriority(priority);
     t.setDeadline(time);
     t.setDone(isDone);
+    t.setProject(project);
     Task newTaskId = taskRepository.save(t);
-
-    project.addTask(t);
-    projectRepository.save(project);
     return newTaskId.getId();
   }
 
@@ -39,10 +37,9 @@ public class TaskService {
     Optional<Project> maybeProject = projectRepository.findById(projectId);
     Project project = maybeProject.get();
 
+    t.setProject(project);
     Task newTaskId = taskRepository.save(t);
 
-    project.addTask(t);
-    projectRepository.save(project);
     return newTaskId.getId();
   }
 
@@ -58,9 +55,8 @@ public class TaskService {
     t.setPriority(priority);
     t.setDeadline(time);
     t.setDone(isDone);
-    project.addTask(t);
+    t.setProject(project);
     taskRepository.save(t);
-    projectRepository.save(project);
   }
 
   public void updateTask(long projectId, Task t){
@@ -69,7 +65,8 @@ public class TaskService {
 
     //TODO find by id (composition)
     // project.getTasks().
-    project.addTask(t);
+
+    t.setProject(project);
     taskRepository.save(t);
     projectRepository.save(project);
   }
