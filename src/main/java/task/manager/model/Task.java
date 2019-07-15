@@ -26,7 +26,7 @@ public class Task {
   private String description;
   private int priority;
   private LocalDateTime deadline;
-  private boolean isDone;
+  private int status;
   @ManyToOne
   @JoinColumn(name = "project_id", nullable = false)
   private Project project;// is this correct?
