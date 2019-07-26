@@ -29,5 +29,5 @@ public class Task {
   private int status;
   @ManyToOne
   @JoinColumn(name = "project_id", nullable = false)
-  private Project project;// is this correct?
+  private Project project;
 }

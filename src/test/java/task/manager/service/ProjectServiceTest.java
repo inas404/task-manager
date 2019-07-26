@@ -2,16 +2,17 @@ package task.manager.service;
 
 import static org.mockito.Mockito.*;
 
-import java.util.Collections;
 import java.util.Optional;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import task.manager.controller.dto.ProjectCreationRequest;
+import task.manager.controller.dto.UpdateProjectAttributeRequest;
 import task.manager.model.Project;
-import task.manager.model.Task;
 import task.manager.repository.ProjectRepository;
 
 public class ProjectServiceTest {
@@ -36,16 +37,30 @@ public class ProjectServiceTest {
 
   @Test
   public void shouldAddProject() {
-    long projectId = projectService.addProject(mockedProject);
-    Mockito.verify(projectRepository, Mockito.times(1)).save(mockedProject);
+    Project newProject = new Project();
+    newProject.setId(0L);
+    newProject.setName("First Project");
+    newProject.setDescription("Description of first Project");
+
+    ProjectCreationRequest request = ProjectCreationRequest.builder()
+        .name(newProject.getName())
+        .description(newProject.getDescription())
+        .build();
+
+    long projectId = projectService.addProject(request);
+    Assert.assertEquals(0L, projectId);
+    Mockito.verify(projectRepository, Mockito.times(1)).save(any(Project.class));
   }
 
   @Test
   public void shouldUpdateProject() {
+    UpdateProjectAttributeRequest request = UpdateProjectAttributeRequest.builder()
+        .description("Updated Description")
+        .build();
+
     Project updated = mockedProject;
     updated.setDescription("Updated Description");
-
-    projectService.updateProject(updated);
+    projectService.updateProject(0L, request);
     Mockito.verify(projectRepository, Mockito.times(1)).save(updated);
   }
 
